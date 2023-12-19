@@ -16,14 +16,14 @@ export default function AmsterdamTemplate() {
     };
     if (document.readyState === "complete") {
       handler();
-    } else {
-      window.addEventListener('load', handler);
-      return () => document.removeEventListener('load', handler);
+    } else if (typeof window !== "undefined") {
+        window.addEventListener('load', handler);
+        return () => document.removeEventListener('load', handler);
     }
-  }, [window]);
+  }, []);
 
   const printDocument = () => {
-    window.print()
+    if (typeof window !== "undefined") window.print()
   }
 
   return (

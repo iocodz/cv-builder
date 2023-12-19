@@ -16,14 +16,14 @@ export default function DefaultTemplate() {
     };
     if (document.readyState === "complete") {
       handler();
-    } else {
-      window.addEventListener('load', handler);
-      return () => document.removeEventListener('load', handler);
-    }
-  }, [window]);
+    } else if (typeof window !== "undefined") {
+        window.addEventListener('load', handler);
+        return () => document.removeEventListener('load', handler);
+      }
+  }, []);
 
   const printDocument = () => {
-    window.print()
+    if (typeof window !== "undefined") window.print()
   }
 
   return (
