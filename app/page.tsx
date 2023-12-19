@@ -406,11 +406,7 @@ const CVForm = () => {
               setTemplate({...templates[index]})
             }}>
               <img className={(t.slug === template.slug ? "border-4 border-info " : "") + "object-cover w-full aspect-square object-top rounded"} src={t.picture} alt={t.name} />
-              <label className="my-4 gap-4 flex items-center">
-                <input onChange={() => {}} checked={t.slug === template.slug} name="template" type="radio" className="radio" />
-                {t.name}
-              </label>
-              
+              <p className="mt-2 mb-0">{t.name}</p>
             </div>
           ))}
         </div>
