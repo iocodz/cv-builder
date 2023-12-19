@@ -3,10 +3,24 @@
 import { Experience, Person } from "@/@types";
 import { months } from "@/config";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function DefaultTemplate() { 
   const searchParams = useSearchParams()
+  const [processing, setProcessing] = useState(true);
   const person : Person = JSON.parse(searchParams.get('person') ?? "{}")
+
+  useEffect(() => {
+    const handler = () => {
+      setProcessing(false);
+    };
+    if (document.readyState === "complete") {
+      handler();
+    } else {
+      window.addEventListener('load', handler);
+      return () => document.removeEventListener('load', handler);
+    }
+  }, [window]);
 
   const printDocument = () => {
     window.print()
@@ -14,7 +28,10 @@ export default function DefaultTemplate() {
 
   return (
     <div className="text-gray-800 dark:text-gray-800 relative w-full min-h-screen overflow-x-hidden flex justify-center content-center bg-gray-100">
-      <button id="download" onClick={printDocument} className="btn btn-square btn-warning w-auto px-4 absolute bottom-4 right-4">Download PDF</button>
+      <div id="download" className="p-8 absolute min-h-screen w-full top-0 left-0 bg-base-100 flex flex-col gap-4 items-center justify-center">
+        {!processing && <h1 className="text-center dark:text-gray-100 text-4xl font-semibold">{person.name}, your resume is ready!!</h1>}
+        <button disabled={processing} onClick={printDocument} className="font-bold w-full sm:w-auto btn btn-square btn-warning px-4">{processing ? "Processing..." : "Download PDF"}</button>
+      </div>
       <div className="rounded-sm py-10 px-10 w-[900px] min-h-[1000px] bg-white">
         <header>
           <div className="flex justify-between items-center">
