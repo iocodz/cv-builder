@@ -13,7 +13,7 @@ export default function DefaultTemplate() {
   }
 
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden flex justify-center content-center bg-gray-100">
+    <div className="text-gray-800 dark:text-gray-800 relative w-full min-h-screen overflow-x-hidden flex justify-center content-center bg-gray-100">
       <button id="download" onClick={printDocument} className="btn btn-square btn-warning w-auto px-4 absolute bottom-4 right-4">Download PDF</button>
       <div className="rounded-sm py-10 px-10 w-[900px] min-h-[1000px] bg-white">
         <header>
