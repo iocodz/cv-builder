@@ -18,4 +18,11 @@ export interface Person {
   country: string;
   education: Experience[];
   work: Experience[];
+  skills: string[];
+}
+
+export interface Template {
+  name: string;
+  slug: string;
+  picture: string;
 }
