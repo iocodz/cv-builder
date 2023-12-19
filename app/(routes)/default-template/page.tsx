@@ -20,7 +20,7 @@ export default function DefaultTemplate() {
       window.addEventListener('load', handler);
       return () => document.removeEventListener('load', handler);
     }
-  }, []);
+  }, [window]);
 
   const printDocument = () => {
     window.print()

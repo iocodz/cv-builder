@@ -20,7 +20,7 @@ export default function AmsterdamTemplate() {
       window.addEventListener('load', handler);
       return () => document.removeEventListener('load', handler);
     }
-  }, []);
+  }, [window]);
 
   const printDocument = () => {
     window.print()
