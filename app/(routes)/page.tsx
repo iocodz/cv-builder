@@ -1,10 +1,12 @@
 "use client";
 
-import { Experience, Person, Template } from "@/@types";
+import { CurriculumType, ExperienceType, TemplateType } from "@/app/_types";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import { StateType } from "../lib/store";
 
-const templates: Template[] = [
+const templates: TemplateType[] = [
   {
     name: "default-template",
     slug: "default-template",
@@ -20,86 +22,57 @@ const templates: Template[] = [
 const CVForm = () => {
   const router = useRouter();
 
-  const [template, setTemplate] = useState<Template>(templates[0]);
+  const curriculum: CurriculumType = useStoreState<StateType>((state) => state.curriculum);
+  const setCurriculum = useStoreActions<StateType>((actions) => actions.setCurriculum);
 
-  const [person, setPerson] = useState<Person>({
-    name: "",
-    image: "",
-    title: "",
-    about: "",
-    email: "",
-    phone: "",
-    website: "",
-    country: "",
-    education: [
-      {
-        id: 0,
-        degree: "",
-        institution: "",
-        notes: "",
-        from: new Date(),
-        to: new Date(),
-      },
-    ],
-    work: [
-      {
-        id: 0,
-        degree: "",
-        institution: "",
-        notes: "",
-        from: new Date(),
-        to: new Date(),
-      },
-    ],
-    skills: [],
-  });
+  const [template, setTemplate] = useState<TemplateType>(templates[0]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    key: keyof Person
+    key: keyof CurriculumType
   ) => {
     const { value } = event.target;
-    setPerson((prev) => ({
-      ...prev,
-      [key]: key === "image" ? encodeURIComponent(value) : value,
-    }));
+    setCurriculum({
+      ...curriculum,
+      [key]: value,
+    });
   };
 
   const handleChangeWork = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    key: keyof Experience,
+    key: keyof ExperienceType,
     index: number
   ) => {
     const { value } = event.target;
-    setPerson((prev) => ({
-      ...prev,
-      work: prev.work.map((item, idx) =>
+    setCurriculum({
+      ...curriculum,
+      work: curriculum.work.map((item, idx) =>
         idx === index ? { ...item, [key]: value } : item
       ),
-    }));
+    });
   };
 
   const handleChangeEducation = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    key: keyof Experience,
+    key: keyof ExperienceType,
     index: number
   ) => {
     const { value } = event.target;
-    setPerson((prev) => ({
-      ...prev,
-      education: prev.education.map((item, idx) =>
+    setCurriculum({
+      ...curriculum,
+      education: curriculum.education.map((item, idx) =>
         idx === index ? { ...item, [key]: value } : item
       ),
-    }));
+    });
   };
 
   const addEducation = () => {
-    setPerson((prev) => ({
-      ...prev,
+    setCurriculum({
+      ...curriculum,
       education: [
-        ...prev.education,
+        ...curriculum.education,
         {
-          id: prev.education.length,
+          id: curriculum.education.length,
           institution: "",
           degree: "",
           notes: "",
@@ -107,16 +80,16 @@ const CVForm = () => {
           to: new Date(),
         },
       ],
-    }));
+    });
   };
 
   const addWork = () => {
-    setPerson((prev) => ({
-      ...prev,
+    setCurriculum({
+      ...curriculum,
       work: [
-        ...prev.work,
+        ...curriculum.work,
         {
-          id: prev.work.length,
+          id: curriculum.work.length,
           institution: "",
           degree: "",
           notes: "",
@@ -124,21 +97,21 @@ const CVForm = () => {
           to: new Date(),
         },
       ],
-    }));
+    });
   };
 
   const handleDeleteWork = (index: number) => {
-    setPerson((prev) => ({
-      ...prev,
-      work: prev.work.filter((item: Experience) => item.id !== index),
-    }));
+    setCurriculum({
+      ...curriculum,
+      work: curriculum.work.filter((item) => item.id !== index),
+    });
   };
 
   const handleDeleteEducation = (index: number) => {
-    setPerson((prev) => ({
-      ...prev,
-      education: prev.education.filter((item: Experience) => item.id !== index),
-    }));
+    setCurriculum({
+      ...curriculum,
+      education: curriculum.education.filter((item) => item.id !== index),
+    });
   };
 
   return (
@@ -147,7 +120,8 @@ const CVForm = () => {
         className="grid grid-cols-1 gap-2"
         onSubmit={(e: any) => {
           e.preventDefault();
-          window.open("/" + template.slug + "?person=" + JSON.stringify(person), '__blank');
+          router.push("/" + template.slug);
+          // window.open("/" + template.slug + "?curriculum=" + JSON.stringify(curriculum), '__blank');
         }}
       >
         <h1 className="text-2xl font-bold">Create your CV</h1>
@@ -158,7 +132,7 @@ const CVForm = () => {
           type="text"
           placeholder="Name"
           className="input input-bordered w-full"
-          defaultValue={person.name}
+          defaultValue={curriculum.name}
         />
         <input
           required
@@ -166,7 +140,7 @@ const CVForm = () => {
           type="text"
           placeholder="Avatar URL"
           className="input input-bordered w-full"
-          defaultValue={person.image}
+          defaultValue={curriculum.image}
         />
         <input
           required
@@ -174,7 +148,7 @@ const CVForm = () => {
           type="text"
           placeholder="Professional title"
           className="input input-bordered w-full"
-          defaultValue={person.title}
+          defaultValue={curriculum.title}
         />
         <input
           required
@@ -182,12 +156,12 @@ const CVForm = () => {
           type="text"
           placeholder="Location"
           className="input input-bordered w-full"
-          defaultValue={person.country}
+          defaultValue={curriculum.country}
         />
         <input
           required
           onChange={(e) => handleChange(e, "email")}
-          defaultValue={person.email}
+          defaultValue={curriculum.email}
           type="email"
           placeholder="Email"
           className="input input-bordered w-full"
@@ -195,7 +169,7 @@ const CVForm = () => {
         <input
           required
           onChange={(e) => handleChange(e, "phone")}
-          defaultValue={person.phone}
+          defaultValue={curriculum.phone}
           type="tel"
           placeholder="Phone"
           className="input input-bordered w-full"
@@ -203,14 +177,14 @@ const CVForm = () => {
         <input
           required
           onChange={(e) => handleChange(e, "website")}
-          defaultValue={person.website}
+          defaultValue={curriculum.website}
           type="text"
           placeholder="Website"
           className="input input-bordered w-full"
         />
         <textarea
           onChange={(e) => handleChange(e, "about")}
-          defaultValue={person.about}
+          defaultValue={curriculum.about}
           placeholder="About"
           className="textarea textarea-bordered h-24 text-base"
         ></textarea>
@@ -218,7 +192,7 @@ const CVForm = () => {
         <div className="divider" />
 
         <h2 className="text-xl font-semibold">Work Experience</h2>
-        {person.work.map((workItem, index) => (
+        {curriculum.work.map((workItem, index) => (
           <div key={index} className="grid grid-cols-1 gap-2">
             {index > 0 && <div className="divider" />}
             <input
@@ -246,9 +220,9 @@ const CVForm = () => {
             <div className="grid grid-cols-2 gap-2">
               <input
                 defaultValue={
-                  new Date(person.work[index].from).getFullYear() +
+                  new Date(curriculum.work[index].from).getFullYear() +
                   "-" +
-                  (new Date(person.work[index].from).getUTCMonth() + 1)
+                  (new Date(curriculum.work[index].from).getUTCMonth() + 1)
                 }
                 onChange={(e) => handleChangeWork(e, "from", index)}
                 type="month"
@@ -257,9 +231,9 @@ const CVForm = () => {
               />
               <input
                 defaultValue={
-                  new Date(person.work[index].to).getFullYear() +
+                  new Date(curriculum.work[index].to).getFullYear() +
                   "-" +
-                  (new Date(person.work[index].to).getUTCMonth() + 1)
+                  (new Date(curriculum.work[index].to).getUTCMonth() + 1)
                 }
                 onChange={(e) => handleChangeWork(e, "to", index)}
                 type="month"
@@ -288,7 +262,7 @@ const CVForm = () => {
         <div className="divider" />
 
         <h2 className="text-xl font-semibold">Education</h2>
-        {person.education.map((eduItem, index) => (
+        {curriculum.education.map((eduItem, index) => (
           <div key={index} className="grid grid-cols-1 gap-2">
             {index > 0 && <div className="divider" />}
             <input
@@ -316,9 +290,9 @@ const CVForm = () => {
             <div className="grid grid-cols-2 gap-2">
               <input
                 defaultValue={
-                  new Date(person.education[index].from).getFullYear() +
+                  new Date(curriculum.education[index].from).getFullYear() +
                   "-" +
-                  (new Date(person.education[index].from).getUTCMonth() + 1)
+                  (new Date(curriculum.education[index].from).getUTCMonth() + 1)
                 }
                 onChange={(e) => handleChangeEducation(e, "from", index)}
                 type="month"
@@ -327,9 +301,9 @@ const CVForm = () => {
               />
               <input
                 defaultValue={
-                  new Date(person.education[index].to).getFullYear() +
+                  new Date(curriculum.education[index].to).getFullYear() +
                   "-" +
-                  (new Date(person.education[index].to).getUTCMonth() + 1)
+                  (new Date(curriculum.education[index].to).getUTCMonth() + 1)
                 }
                 onChange={(e) => handleChangeEducation(e, "to", index)}
                 type="month"
@@ -365,9 +339,9 @@ const CVForm = () => {
               const target = e.target as HTMLInputElement;
               if (e.key === "Enter") {
                 e.preventDefault();
-                setPerson({
-                  ...person,
-                  skills: [...person.skills, target.value],
+                setCurriculum({
+                  ...curriculum,
+                  skills: [...curriculum.skills, target.value],
                 });
                 target.value = "";
               }
@@ -378,17 +352,17 @@ const CVForm = () => {
           />
         </div>
         <div className="flex gap-1">
-          {person.skills.map((skill, index) => (
+          {curriculum.skills.map((skill, index) => (
             <div
               onClick={() => {
-                setPerson((prev) => ({
-                  ...prev,
+                setCurriculum({
+                  ...curriculum,
                   skills: [
-                    ...prev.skills.filter(
+                    ...curriculum.skills.filter(
                       (skillName: string) => skillName !== skill
                     ),
                   ],
-                }));
+                });
               }}
               key={index}
               className="btn btn-active btn-sm"

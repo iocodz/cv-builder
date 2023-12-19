@@ -1,5 +1,5 @@
 "use client";
-import { Experience, Person } from "@/@types";
+import { Experience, Person } from "@/app/_types";
 import { months } from "@/config";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

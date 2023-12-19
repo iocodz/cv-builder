@@ -1,14 +1,14 @@
 "use client";
 
-import { Experience, Person } from "@/@types";
+import { CurriculumType } from "@/app/_types";
+import { StateType } from "@/app/lib/store";
 import { months } from "@/config";
-import { useSearchParams } from "next/navigation";
+import { useStoreState } from "easy-peasy";
 import { useEffect, useState } from "react";
 
 export default function DefaultTemplate() { 
-  const searchParams = useSearchParams()
   const [processing, setProcessing] = useState(true);
-  const person : Person = JSON.parse(searchParams.get('person') ?? "{}")
+  const curriculum: CurriculumType = useStoreState<StateType>((state) => state.curriculum);
 
   useEffect(() => {
     const handler = () => {
@@ -20,7 +20,7 @@ export default function DefaultTemplate() {
       window.addEventListener('load', handler);
       return () => document.removeEventListener('load', handler);
     }
-  }, [window]);
+  }, []);
 
   const printDocument = () => {
     window.print()
@@ -34,7 +34,7 @@ export default function DefaultTemplate() {
         ) : (
           <>
             <h1 className="text-center dark:text-gray-100 text-4xl font-semibold">
-              {person.name}, your resume is ready!!
+              {curriculum.name}, your resume is ready!!
             </h1>
             <button
               onClick={printDocument}
@@ -49,11 +49,11 @@ export default function DefaultTemplate() {
         <header>
           <div className="flex justify-between items-center">
             <div className="w-2/6">
-              <img src={person.image} className="aspect-square object-cover rounded-full h-52 w-52" alt="profile image"/>
+              <img src={curriculum.image} className="aspect-square object-cover rounded-full h-52 w-52" alt="profile image"/>
             </div>
             <div className="flex flex-col justify-end items-end w-4/6">
-              <h1 className="text-4xl font-extrabold text-end">{person.name}</h1>
-              <p className="text-xl mt-5">{person.title}</p>
+              <h1 className="text-4xl font-extrabold text-end">{curriculum.name}</h1>
+              <p className="text-xl mt-5">{curriculum.title}</p>
             </div>
           </div>
         </header>
@@ -63,25 +63,25 @@ export default function DefaultTemplate() {
             <ul className="mt-2 mb-10">
               <li className=" mt-1">
                 <strong className="mr-1">Website </strong>
-                <a href={person.website} className="block">
-                  {person.website}
+                <a href={curriculum.website} className="block">
+                  {curriculum.website}
                 </a>
               </li>
               <li className=" mt-1">
                 <strong className="mr-1">Phone </strong>
-                <a href={"tel:" + person.phone} className="block">
-                  {person.phone}
+                <a href={"tel:" + curriculum.phone} className="block">
+                  {curriculum.phone}
                 </a>
               </li>
               <li className=" mt-1">
                 <strong className="mr-1">E-mail </strong>
-                <a href={"mailto:" + person.email} className="block">
-                  {person.email}
+                <a href={"mailto:" + curriculum.email} className="block">
+                  {curriculum.email}
                 </a>
               </li>
               <li className=" mt-1">
                 <strong className="mr-1">Location</strong>
-                <span className="block">{person.country}</span>
+                <span className="block">{curriculum.country}</span>
               </li>
             </ul>
           </div>
@@ -89,7 +89,7 @@ export default function DefaultTemplate() {
             <section>
               <h2 className="text-2xl pb-1 border-b font-semibold">About</h2>
               <p className="mt-4 text-lg">
-                {person.about}
+                {curriculum.about}
               </p>
             </section>
             {/* <section>
@@ -286,7 +286,7 @@ export default function DefaultTemplate() {
                 Work Experiences
               </h2>
               <ul className="mt-2">
-                {person.work.map((experience: Experience, i: number) => <li key={i} className="pt-2">
+                {curriculum.work.map((experience, i) => <li key={i} className="pt-2">
                   <p className="flex justify-between text-sm">
                     <strong className="text-base">{experience.institution}</strong>{months[new Date(experience.from).getUTCMonth()]} {new Date(experience.from).getFullYear()} - {months[new Date(experience.to).getUTCMonth()]} {new Date(experience.to).getFullYear()}
                   </p>
@@ -304,7 +304,7 @@ export default function DefaultTemplate() {
                 Education
               </h2>
               <ul className="mt-2">
-              {person.education.map((experience: Experience, i: number) => <li key={i} className="pt-2">
+              {curriculum.education.map((experience, i) => <li key={i} className="pt-2">
                   <p className="flex justify-between text-sm mb-0">
                   <strong className="text-base">{experience.institution}</strong>{months[new Date(experience.from).getUTCMonth()]} {new Date(experience.from).getFullYear()} - {months[new Date(experience.to).getUTCMonth()]} {new Date(experience.to).getFullYear()}
                   </p>
