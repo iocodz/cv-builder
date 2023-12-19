@@ -4,22 +4,22 @@ import { CurriculumType, ExperienceType, TemplateType } from "@/app/_types";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { StateType } from "../lib/store";
+import { StateType } from "../_lib/store";
 
 const templates: TemplateType[] = [
   {
-    name: "default-template",
-    slug: "default-template",
-    picture: "/templates/default-template.png",
+    name: "ease",
+    slug: "/t/ease",
+    picture: "/templates/ease.png",
   },
   {
     name: "toreylittlefield",
-    slug: "toreylittlefield",
+    slug: "/t/toreylittlefield",
     picture: "/templates/toreylittlefield.png",
   },
   {
     name: "amsterdam",
-    slug: "amsterdam",
+    slug: "/t/amsterdam",
     picture: "/templates/amsterdam.png",
   },
 ];
@@ -125,7 +125,7 @@ const CVForm = () => {
         className="grid grid-cols-1 gap-2"
         onSubmit={(e: any) => {
           e.preventDefault();
-          router.push("/" + template.slug);
+          router.push(template.slug);
           // window.open("/" + template.slug + "?curriculum=" + JSON.stringify(curriculum), '__blank');
         }}
       >
@@ -242,7 +242,10 @@ const CVForm = () => {
             </div>
             {index > 0 && (
               <button
-                onClick={() => handleDeleteWork(index)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDeleteWork(workItem.id)
+                }}
                 className="btn btn-error"
               >
                 Delete
@@ -306,7 +309,10 @@ const CVForm = () => {
             </div>
             {index > 0 && (
               <button
-                onClick={() => handleDeleteEducation(index)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDeleteEducation(eduItem.id)
+                }}
                 className="btn btn-error"
               >
                 Delete

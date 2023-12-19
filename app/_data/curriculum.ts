@@ -44,7 +44,7 @@ export const curriculumFakeData: CurriculumType = {
   country: "USA",
   education: [
     {
-      id: 1,
+      id: 0,
       degree: "B.Sc. in Computer Science",
       institution: "University of Technology",
       notes:
@@ -55,7 +55,7 @@ export const curriculumFakeData: CurriculumType = {
   ],
   work: [
     {
-      id: 1,
+      id: 0,
       degree: "Senior Web Developer",
       institution: "Tech Solutions Inc.",
       notes:

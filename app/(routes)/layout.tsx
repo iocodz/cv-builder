@@ -2,7 +2,7 @@
 
 import './globals.css'
 import { StoreProvider } from 'easy-peasy'
-import { store } from '../lib/store'
+import { store } from '../_lib/store'
 
 export default function RootLayout({
   children,
