@@ -2,7 +2,7 @@
 
 import { Action, action, createStore } from "easy-peasy";
 import { CurriculumType } from "@/app/_types";
-import { curriculumFakeData } from "../_data/curriculum";
+import { curriculumEmptyData } from "../_data/curriculum";
 
 export interface StateType {
   curriculum: CurriculumType;
@@ -10,7 +10,7 @@ export interface StateType {
 }
 
 export const store = createStore<StateType>({
-  curriculum: curriculumFakeData,
+  curriculum: curriculumEmptyData,
   setCurriculum: action((state, payload: CurriculumType) => {
     state.curriculum = payload;
   }),
