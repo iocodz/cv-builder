@@ -48,7 +48,7 @@ export default function AmsterdamTemplate() {
       <div className="rounded-sm p-10 w-[900px] min-h-[1000px] bg-white">
         <div className="flex justify-between items-center">
           <h1 className="text-4xl font-bold">{curriculum.name}</h1>
-          <img className="w-[100px] rounded-full" src={curriculum.image} />
+          <img className="w-[100px] rounded-full" src={curriculum.image} alt="profile" />
         </div>
         <h2 className="mb-4 text-xl font-semibold text-gray-700">{curriculum.title}</h2>
         <div className="flex flex-wrap gap-2 text-lg text-gray-500">
