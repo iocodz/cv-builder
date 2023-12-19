@@ -1,5 +1,37 @@
 import { CurriculumType } from "../_types";
 
+export const curriculumEmptyData: CurriculumType = {
+  name: "",
+  image: "",
+  title: "",
+  about: "",
+  email: "",
+  phone: "",
+  website: "",
+  country: "",
+  education: [
+    {
+      id: 0,
+      degree: "",
+      institution: "",
+      notes: "",
+      from: new Date(),
+      to: new Date(),
+    },
+  ],
+  work: [
+    {
+      id: 0,
+      degree: "",
+      institution: "",
+      notes: "",
+      from: new Date(),
+      to: new Date(),
+    },
+  ],
+  skills: [],
+};
+
 export const curriculumFakeData: CurriculumType = {
   name: "John Doe",
   image: "https://ntrepidcorp.com/wp-content/uploads/2016/06/team-1.jpg",
