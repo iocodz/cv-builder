@@ -17,6 +17,11 @@ const templates: TemplateType[] = [
     slug: "toreylittlefield",
     picture: "/templates/toreylittlefield.png",
   },
+  {
+    name: "amsterdam",
+    slug: "amsterdam",
+    picture: "/templates/amsterdam.png",
+  },
 ];
 
 const CVForm = () => {
@@ -47,7 +52,7 @@ const CVForm = () => {
     setCurriculum({
       ...curriculum,
       work: curriculum.work.map((item, idx) =>
-        idx === index ? { ...item, [key]: value } : item
+        idx === index ? { ...item, [key]: (key === "to" || key === "from") ? new Date(value) : value } : item
       ),
     });
   };
@@ -61,7 +66,7 @@ const CVForm = () => {
     setCurriculum({
       ...curriculum,
       education: curriculum.education.map((item, idx) =>
-        idx === index ? { ...item, [key]: value } : item
+        idx === index ? { ...item, [key]: (key === "to" || key === "from") ? new Date(value) : value } : item
       ),
     });
   };
@@ -219,26 +224,20 @@ const CVForm = () => {
             ></textarea>
             <div className="grid grid-cols-2 gap-2">
               <input
-                defaultValue={
-                  new Date(curriculum.work[index].from).getFullYear() +
-                  "-" +
-                  (new Date(curriculum.work[index].from).getUTCMonth() + 1)
-                }
+                defaultValue={curriculum.work[index].from.toISOString().slice(0, 7)}
                 onChange={(e) => handleChangeWork(e, "from", index)}
                 type="month"
                 placeholder="From"
                 className="input input-bordered w-full"
+                required
               />
               <input
-                defaultValue={
-                  new Date(curriculum.work[index].to).getFullYear() +
-                  "-" +
-                  (new Date(curriculum.work[index].to).getUTCMonth() + 1)
-                }
+                defaultValue={curriculum.work[index].to.toISOString().slice(0, 7)}
                 onChange={(e) => handleChangeWork(e, "to", index)}
                 type="month"
                 placeholder="To"
                 className="input input-bordered w-full"
+                required
               />
             </div>
             {index > 0 && (
@@ -289,26 +288,20 @@ const CVForm = () => {
             ></textarea>
             <div className="grid grid-cols-2 gap-2">
               <input
-                defaultValue={
-                  new Date(curriculum.education[index].from).getFullYear() +
-                  "-" +
-                  (new Date(curriculum.education[index].from).getUTCMonth() + 1)
-                }
+                defaultValue={curriculum.education[index].from.toISOString().slice(0, 7)}
                 onChange={(e) => handleChangeEducation(e, "from", index)}
                 type="month"
                 placeholder="From"
                 className="input input-bordered w-full"
+                required
               />
               <input
-                defaultValue={
-                  new Date(curriculum.education[index].to).getFullYear() +
-                  "-" +
-                  (new Date(curriculum.education[index].to).getUTCMonth() + 1)
-                }
+                defaultValue={curriculum.education[index].to.toISOString().slice(0, 7)}
                 onChange={(e) => handleChangeEducation(e, "to", index)}
                 type="month"
                 placeholder="To"
                 className="input input-bordered w-full"
+                required
               />
             </div>
             {index > 0 && (
@@ -351,7 +344,7 @@ const CVForm = () => {
             className="input input-bordered w-full"
           />
         </div>
-        <div className="flex gap-1">
+        <div className="flex flex-wrap gap-1">
           {curriculum.skills.map((skill, index) => (
             <div
               onClick={() => {
@@ -381,7 +374,7 @@ const CVForm = () => {
               setTemplate({...templates[index]})
             }}>
               <img className={(t.slug === template.slug ? "border-4 border-info " : "") + "object-cover w-full aspect-square object-top rounded"} src={t.picture} alt={t.name} />
-              <p className="mt-2 mb-0">{t.name}</p>
+              <p className="mt-2 mb-2">{t.name}</p>
             </div>
           ))}
         </div>

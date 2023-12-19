@@ -1,13 +1,14 @@
 "use client";
-import { Experience, Person } from "@/app/_types";
+
+import { CurriculumType } from "@/app/_types";
+import { StateType } from "@/app/lib/store";
 import { months } from "@/config";
-import { useSearchParams } from "next/navigation";
+import { useStoreState } from "easy-peasy";
 import { useEffect, useState } from "react";
 
 export default function Toreylittlefield() {
-  const searchParams = useSearchParams();
   const [processing, setProcessing] = useState(true);
-  const person: Person = JSON.parse(searchParams.get("person") ?? "{}");
+  const curriculum: CurriculumType = useStoreState<StateType>((state) => state.curriculum);
 
   useEffect(() => {
     const handler = () => {
@@ -36,7 +37,7 @@ export default function Toreylittlefield() {
         ) : (
           <>
             <h1 className="text-center dark:text-gray-100 text-4xl font-semibold">
-              {person.name}, your resume is ready!!
+              {curriculum.name}, your resume is ready!!
             </h1>
             <button
               onClick={printDocument}
@@ -70,7 +71,7 @@ export default function Toreylittlefield() {
           >
             <div>
               <h1 className="print:text-6xl lg:text-6xl md:text-5xl mr-auto text-3xl font-semibold text-gray-750 pb-px">
-                {person.name}
+                {curriculum.name}
               </h1>
 
               <h2
@@ -78,12 +79,12 @@ export default function Toreylittlefield() {
                 className="print:text-3xl text-purple-700 font-sans self-center md:text-3xl text-2xl font-hairline pb-px"
               >
                 <code className="print:text-3xl text-purple-700 font-sans self-center md:text-3xl text-2xl font-hairline pb-px">
-                  {person.title}
+                  {curriculum.title}
                 </code>
               </h2>
             </div>
             <img
-              src={person.image}
+              src={curriculum.image}
               className="aspect-square object-cover w-32 mb-1 rounded"
               alt="profile image"
             />
@@ -100,7 +101,7 @@ export default function Toreylittlefield() {
 
                 <section className="mb-0 grid grid-cols-1 ">
                   <p className="mt-2 text-sm text-gray-700 leading-normal">
-                    {person.about}
+                    {curriculum.about}
                   </p>
                 </section>
               </section>
@@ -110,7 +111,7 @@ export default function Toreylittlefield() {
                   Experience
                 </h2>
 
-                {person.work.map((experience: Experience, index: number) => (
+                {curriculum.work.map((experience, index: number) => (
                   <section key={index} className="mb-4">
                     <header>
                       <h3
@@ -158,28 +159,28 @@ export default function Toreylittlefield() {
                   <div className="my-2.5 last:pb-1.5">
                     <ul className="flex flex-col flex-wrap text-md leading-relaxed gap-2">
                       <a
-                        href={"mailto:" + person.email}
+                        href={"mailto:" + curriculum.email}
                         className="text-sm link text-gray-900 rounded"
                       >
-                        {person.email}
+                        {curriculum.email}
                       </a>
                       <a
-                        href={"tel:" + person.phone}
+                        href={"tel:" + curriculum.phone}
                         className="text-sm link text-gray-900 rounded"
                       >
-                        {person.phone}
+                        {curriculum.phone}
                       </a>
                       <a
-                        href={person.website}
+                        href={curriculum.website}
                         className="text-sm link text-gray-900 rounded"
                       >
-                        {person.website}
+                        {curriculum.website}
                       </a>
                       <a
-                        href={person.country}
+                        href={curriculum.country}
                         className="text-sm text-gray-900 rounded"
                       >
-                        {person.country}
+                        {curriculum.country}
                       </a>
                     </ul>
                   </div>
@@ -196,8 +197,8 @@ export default function Toreylittlefield() {
                   </header>
                   <div className="my-2.5 last:pb-1.5">
                     <ul className="flex flex-wrap text-md leading-relaxed gap-2">
-                      {person.skills.length > 0 &&
-                        person.skills.map((skill: string) => (
+                      {curriculum.skills.length > 0 &&
+                        curriculum.skills.map((skill) => (
                           <li
                             key={skill}
                             className="p-2 py-1 text-xs text-gray-750 print:border-inset bg-gray-200 rounded"
@@ -215,8 +216,8 @@ export default function Toreylittlefield() {
                   Education
                 </h2>
 
-                {person.education.map(
-                  (experience: Experience, index: number) => (
+                {curriculum.education.map(
+                  (experience, index: number) => (
                     <section key={index} className="mb-4.5">
                       <header>
                         <h3 className="text-lg font-semibold text-gray-700 leading-snugish">
