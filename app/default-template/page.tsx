@@ -19,9 +19,7 @@ export default function DefaultTemplate() {
         <header>
           <div className="flex justify-between items-center">
             <div className="w-2/6">
-              <div className="bg-cover bg-no-repeat rounded-full h-52 w-52" style={{
-                backgroundImage: `url(${person.image})`
-              }}></div>
+              <img src={person.image} className="object-cover rounded-full h-52 w-52" alt="profile image"/>
             </div>
             <div className="flex flex-col justify-end items-end w-4/6">
               <h1 className="text-4xl font-extrabold text-end">{person.name}</h1>
