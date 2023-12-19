@@ -147,7 +147,7 @@ const CVForm = () => {
         className="grid grid-cols-1 gap-2"
         onSubmit={(e: any) => {
           e.preventDefault();
-          router.push("/" + template.slug + "?person=" + JSON.stringify(person));
+          window.open("/" + template.slug + "?person=" + JSON.stringify(person), '__blank');
         }}
       >
         <h1 className="text-2xl font-bold">Create your CV</h1>
@@ -400,6 +400,7 @@ const CVForm = () => {
 
         <div className="divider" />
 
+        <h2 className="text-xl font-semibold">Template</h2>
         <div className="grid grid-cols-2 gap-2">
           {templates.map((t, index: number) => (
             <div className="cursor-pointer" key={t.slug} onClick={() => {
