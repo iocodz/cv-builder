@@ -53,6 +53,12 @@ export default function AmsterdamTemplate() {
         <span key={w} className="text-gray-900 bg-gray-200 px-2 py-1 rounded">{w}</span>
       )}
       </div>
+      <h2 className="text-gray-500 mt-12 text-lg font-bold">LANGUAGES</h2>
+      <div  className="mt-1 flex flex-col">
+      {curriculum.languages.map(language =>
+        <span key={language.language} className="text-gray-600">{language.language} - {language.level}</span>
+      )}
+      </div>
     </div>
   );
 }

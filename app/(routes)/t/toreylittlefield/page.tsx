@@ -85,6 +85,43 @@ export default function Toreylittlefield() {
               </section>
             ))}
           </section>
+
+          <section className="col-span-3 mt-6 first:mt-0" id="experience">
+            <h2 className="mb-4 font-bold tracking-widest text-sm2 text-purple-700">
+              Education
+            </h2>
+
+            {curriculum.education.map((experience, index: number) => (
+              <section key={index} className="mb-4">
+                <header>
+                  <h3
+                    id="job-title"
+                    className="text-lg font-semibold text-gray-700 leading-snugish"
+                  >
+                    {experience.degree}
+                    <span
+                      id="company-name"
+                      className="text-gray-550 font-semibold"
+                    >
+                      {" "}
+                      | {experience.institution}
+                    </span>
+                  </h3>
+                  <p
+                    id="work-date-location"
+                    className="leading-normal text-sm text-gray-700 mt-1"
+                  >
+                    {dateMMMYYY(experience.from)} - {dateMMMYYY(experience.to)}
+                  </p>
+                </header>
+                <ul id="work-description-bullets" className="">
+                  <li className="mt-2 text-sm text-gray-700 leading-normal">
+                    {experience.notes}
+                  </li>
+                </ul>
+              </section>
+            ))}
+          </section>
         </section>
 
         <section className="print:col-span-1 col-span-3 md:col-span-1">
@@ -151,28 +188,22 @@ export default function Toreylittlefield() {
             </section>
           </section>
 
-          <section className="col-span-3 mt-8 first:mt-0" id="education">
+          <section className="col-span-1 mt-8 first:mt-0" id="contact">
             <h2 className="mb-4 font-bold tracking-widest text-sm2 text-purple-700">
-              Education
+              Languages
             </h2>
-
-            {curriculum.education.map((experience, index: number) => (
-              <section key={index} className="mb-4.5">
-                <header>
-                  <h3 className="text-lg font-semibold text-gray-700 leading-snugish">
-                    {experience.institution}
-                  </h3>
-                </header>
-                <p className="mt-2.1 text-sm text-gray-800 leading-normal">
-                  {experience.degree}
-                </p>
-                <p className="mt-0.5 text-xs text-gray-600 leading-normal">
-                  {dateMMMYYY(experience.from)} - {dateMMMYYY(experience.to)}
-                  <br />
-                  {experience.notes}
-                </p>
-              </section>
-            ))}
+            <section className="mb-1.5" id="programming-languages">
+              <header>
+                <h3 className="text-lg font-semibold text-gray-700 leading-snugish"></h3>
+              </header>
+              <div className="my-1 last:pb-1.5">
+                <div className="flex flex-col text-md leading-relaxed">
+                  {curriculum.languages.map(language => <p key={language.language} className="text-sm text-gray-900">
+                    {language.language} - {language.level}
+                  </p>)}
+                </div>
+              </div>
+            </section>
           </section>
         </section>
       </div>

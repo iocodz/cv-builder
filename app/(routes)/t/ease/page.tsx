@@ -57,13 +57,23 @@ export default function EaseTemplate() {
             </li>
           </ul>
           <strong className="text-xl font-medium">Skills</strong>
-          <p className="mt-2 flex gap-1 flex-wrap">
+          <p className="mt-2 flex gap-1 flex-wrap mb-10">
             {curriculum.skills.map((skill) => (
               <span
                 key={skill}
                 className="bg-gray-600 text-white px-2 py-1 text-xs rounded"
               >
                 {skill}
+              </span>
+            ))}
+          </p>
+          <strong className="text-xl font-medium">Languages</strong>
+          <p className="mt-2 flex flex-col gap-1 flex-wrap">
+            {curriculum.languages.map((language) => (
+              <span
+                key={language.language}
+              >
+                {language.language} - {language.level}
               </span>
             ))}
           </p>

@@ -1,4 +1,13 @@
-import { CurriculumType } from "../_types";
+import { CurriculumType, ExperienceType } from "../_types";
+
+export const experienceEmptyData: ExperienceType = {
+    id: 0,
+    degree: "",
+    institution: "",
+    notes: "",
+    from: new Date(),
+    to: new Date(),
+  };
 
 export const curriculumEmptyData: CurriculumType = {
   name: "",
@@ -10,26 +19,13 @@ export const curriculumEmptyData: CurriculumType = {
   website: "",
   country: "",
   education: [
-    {
-      id: 0,
-      degree: "",
-      institution: "",
-      notes: "",
-      from: new Date(),
-      to: new Date(),
-    },
+    experienceEmptyData
   ],
   work: [
-    {
-      id: 0,
-      degree: "",
-      institution: "",
-      notes: "",
-      from: new Date(),
-      to: new Date(),
-    },
+    experienceEmptyData
   ],
   skills: [],
+  languages: [],
 };
 
 export const curriculumFakeData: CurriculumType = {
@@ -74,4 +70,5 @@ export const curriculumFakeData: CurriculumType = {
     "SQL",
     "Git",
   ],
+  languages: [],
 };

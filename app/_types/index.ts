@@ -7,6 +7,11 @@ export interface ExperienceType {
   to: Date;
 }
 
+export interface LanguageType {
+  language: string;
+  level: string;
+}
+
 export interface CurriculumType {
   name: string;
   image: string;
@@ -19,10 +24,27 @@ export interface CurriculumType {
   education: ExperienceType[];
   work: ExperienceType[];
   skills: string[];
+  languages: LanguageType[];
 }
 
 export interface TemplateType {
   name: string;
   slug: string;
   picture: string;
+}
+
+export interface AddExperienceType {
+  type: "work" | "education";
+}
+
+export interface UpdateExperienceType {
+  type: "work" | "education";
+  value: string | Date;
+  key: keyof ExperienceType;
+  id: number;
+}
+
+export interface DeleteExperienceType {
+  type: "work" | "education";
+  id: number;
 }
