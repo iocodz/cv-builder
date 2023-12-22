@@ -3,8 +3,8 @@ export interface ExperienceType {
   institution: string;
   degree: string;
   notes: string;
-  from: Date;
-  to: Date;
+  from: string;
+  to: string;
 }
 
 export interface LanguageType {

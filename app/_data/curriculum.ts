@@ -5,8 +5,8 @@ export const experienceEmptyData: ExperienceType = {
     degree: "",
     institution: "",
     notes: "",
-    from: new Date(),
-    to: new Date(),
+    from: "2012-09",
+    to: "2012-09",
   };
 
 export const curriculumEmptyData: CurriculumType = {
@@ -45,8 +45,8 @@ export const curriculumFakeData: CurriculumType = {
       institution: "University of Technology",
       notes:
         "Graduated with honors, focus on web development and data structures.",
-      from: new Date("2012-09-01"),
-      to: new Date("2016-05-30"),
+      from: "2012-09",
+      to: "2016-05",
     },
   ],
   work: [
@@ -56,8 +56,8 @@ export const curriculumFakeData: CurriculumType = {
       institution: "Tech Solutions Inc.",
       notes:
         "Led a team of developers in creating web applications for clients. Focused on creating efficient and user-friendly interfaces.",
-      from: new Date("2016-06-01"),
-      to: new Date("2020-08-31"),
+      from: "2012-09",
+      to: "2012-09",
     },
   ],
   skills: [

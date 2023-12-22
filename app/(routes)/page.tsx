@@ -16,7 +16,7 @@ const CVForm = () => {
     (state) => state.template
   );
   return (
-    <div className="min-h-screen  max-w-xl mx-auto p-4">
+    <div className="min-h-screen max-w-xl mx-auto p-4">
       <form
         className="grid grid-cols-1 gap-2"
         onSubmit={(e: any) => {
@@ -26,13 +26,11 @@ const CVForm = () => {
         }}
       >
         <h1 className="text-2xl font-bold">Create your CV</h1>
-
         <GeneralInformation />
         <ExperienceList />
         <Skills />
         <Languages />
         <TemplateList />
-
         <button type="submit" className="btn btn-square btn-warning w-full">
           Create
         </button>

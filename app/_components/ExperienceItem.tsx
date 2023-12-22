@@ -71,6 +71,7 @@ export default function ExperienceItem({
           placeholder="From"
           className="input input-bordered w-full"
           required
+          defaultValue={data.from}
         />
         <input
           onChange={(e) => handleUpdateExperience(e, "to")}
@@ -78,6 +79,7 @@ export default function ExperienceItem({
           placeholder="To"
           className="input input-bordered w-full"
           required
+          defaultValue={data.to}
         />
       </div>
       {data.id !== 0 && (

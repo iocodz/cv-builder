@@ -5,12 +5,14 @@ import { StateType } from "@/app/_lib/store";
 import { useStoreState } from "easy-peasy";
 import { useEffect, useState } from "react";
 import '../globals.css'
+import { useRouter } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+    const router = useRouter();
     const [processing, setProcessing] = useState(true);
     const curriculum: CurriculumType = useStoreState<StateType>((state) => state.curriculum);
   
@@ -29,6 +31,10 @@ export default function RootLayout({
     const printDocument = () => {
       if (typeof window !== "undefined") window.print();
     };
+
+    const continueEditing = () => {
+        router.push("/")
+    }
   
     return (
       <div className="text-gray-800 dark:text-gray-800 relative w-full min-h-screen overflow-x-hidden flex justify-center content-center bg-gray-100">
@@ -45,9 +51,15 @@ export default function RootLayout({
               </h1>
               <button
                 onClick={printDocument}
-                className="font-bold w-full sm:w-auto btn btn-square btn-warning px-4"
+                className="font-bold w-full sm:w-[200px] btn btn-square btn-warning px-4 mt-2"
               >
                 Download PDF
+              </button>
+              <button
+                onClick={continueEditing}
+                className="font-bold w-full sm:w-[200px] btn btn-square btn-outline btn-warning px-4"
+              >
+                Continue Editing
               </button>
             </>
           )}
