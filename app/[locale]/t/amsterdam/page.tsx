@@ -6,7 +6,7 @@ import { useStoreState } from "easy-peasy";
 import { dateMMMYYY } from "@/app/_helpers/dateFormat";
 
 export default function AmsterdamTemplate() { 
-  const curriculum: CurriculumType = useStoreState<StateType>((state) => state.curriculum);
+  const { curriculum } : { curriculum: CurriculumType } = useStoreState<StateType>((state) => state.curriculum);
 
   return (
     <div className="rounded-sm p-10 w-[900px] min-h-[1000px] bg-white">

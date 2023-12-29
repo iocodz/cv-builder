@@ -20,8 +20,15 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
+#cv {
+  display: none;
+}
+
 @media print {
   #download {
     display: none;
+  }
+  #cv {
+    display: block;
   }
 }

@@ -3,16 +3,18 @@ import { CurriculumType, LanguageType } from "../_types";
 import FormGroup from "./FormGroup";
 import { StateType } from "../_lib/store";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Languages() {
+  const t = useTranslations('BUILDER');
   const [language, setLanguage] = useState("");
   const [level, setLevel] = useState("");
 
-  const curriculum: CurriculumType = useStoreState<StateType>(
+  const { curriculum }: { curriculum: CurriculumType } = useStoreState<StateType>(
     (state) => state.curriculum
   );
-  const {addLanguage, deleteLanguage} = useStoreActions<StateType>(
-    (actions) => actions
+  const { addLanguage, deleteLanguage } = useStoreActions<StateType>(
+    (actions) => actions.curriculum
   );
 
   const handleAddLanguage = () => {
@@ -34,13 +36,13 @@ export default function Languages() {
   }
 
   return (
-    <FormGroup title={"Languages"}>
+    <FormGroup title={"languages"}>
         <div className="flex gap-2">
         <input
             onChange={(e) => setLanguage(e.target.value)}
             name="language"
             type="text"
-            placeholder="Language"
+            placeholder={t('language')}
             className="w-2/5 input input-bordered"
             value={language}
             onKeyDown={handleKeyDown}
@@ -50,11 +52,11 @@ export default function Languages() {
             name="level"
             type="text"
             className="w-2/5 input input-bordered"
-            placeholder="Level"
+            placeholder={t('level')}
             value={level}
             onKeyDown={handleKeyDown}
           />
-          <div onClick={handleAddLanguage} className="w-1/5 btn btn-neutral btn-outline">Add</div>
+          <div onClick={handleAddLanguage} className="w-1/5 btn btn-neutral btn-outline">{t('add')}</div>
         </div>
         <div className="flex flex-wrap gap-1">
           {curriculum.languages.map((language, index) => (

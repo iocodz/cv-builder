@@ -6,7 +6,8 @@ import { useStoreState } from "easy-peasy";
 import { dateMMMYYY } from "@/app/_helpers/dateFormat";
 
 export default function ExampleTemplate() { 
-  const curriculum: CurriculumType = useStoreState<StateType>((state) => state.curriculum);
+  const { curriculum } : { curriculum: CurriculumType } = useStoreState<StateType>((state) => state.curriculum);
+  
   return (
     <div>
       <div>

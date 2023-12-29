@@ -3,16 +3,18 @@ import { templates } from "../_data/template";
 import { TemplateType } from "../_types";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { StateType } from "../_lib/store";
+import { useTranslations } from "next-intl";
 
 export default function TemplateList() {
-  const template: TemplateType = useStoreState<StateType>(
-    (state) => state.template
+  const t = useTranslations('BUILDER');
+  const { template } : { template: TemplateType } = useStoreState<StateType>(
+    (state) => state.curriculum
   );
-  const setTemplate = useStoreActions<StateType>(
-    (actions) => actions.setTemplate
+  const { setTemplate } = useStoreActions<StateType>(
+    (actions) => actions.curriculum
   );
   return (
-    <FormGroup title="Template">
+    <FormGroup title="template">
       <div className="grid grid-cols-2 gap-2">
         {templates.map((t, index: number) => (
           <div

@@ -2,10 +2,12 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { CurriculumType } from "../_types";
 import FormGroup from "./FormGroup";
 import { StateType } from "../_lib/store";
+import { useTranslations } from "next-intl";
 
 export default function GeneralInformation() {  
-    const curriculum: CurriculumType = useStoreState<StateType>((state) => state.curriculum);
-  const setCurriculum = useStoreActions<StateType>((actions) => actions.setCurriculum);
+  const t = useTranslations('BUILDER');
+  const { curriculum } : { curriculum: CurriculumType } = useStoreState<StateType>((state) => state.curriculum);
+  const { setCurriculum } = useStoreActions<StateType>((actions) => actions.curriculum);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -17,29 +19,45 @@ export default function GeneralInformation() {
       [key]: value,
     });
   };
+
+  const handleChangeImage = (e: any) => {
+    const reader = new FileReader();
+    reader.onload = async function (event: any) {
+      // @ts-ignore
+      let fichero = event.target.result.toString();
+      let base64data = await btoa(fichero);
+      console.log(base64data)
+      setCurriculum({
+        ...curriculum,
+        image: "data:image/jpeg;base64," + base64data,
+      });
+    };
+    reader.readAsBinaryString(e.target.files[0]);
+    
+  }
+
     return (
-      <FormGroup title="Personal Information">
+      <FormGroup title="personalInformation">
         <input
           required
           onChange={(e) => handleChange(e, "name")}
           type="text"
-          placeholder="Name"
+          placeholder={t('name')}
           className="input input-bordered w-full"
           defaultValue={curriculum.name}
         />
         <input
           required
-          onChange={(e) => handleChange(e, "image")}
-          type="text"
-          placeholder="Avatar URL"
-          className="input input-bordered w-full"
-          defaultValue={curriculum.image}
+          onChange={(e) => handleChangeImage(e)}
+          type="file"
+          className="file-input file-input-bordered"
+          accept=".png,.jpg,.jpeg"
         />
         <input
           required
           onChange={(e) => handleChange(e, "title")}
           type="text"
-          placeholder="Professional title"
+          placeholder={t('professionalTitle')}
           className="input input-bordered w-full"
           defaultValue={curriculum.title}
         />
@@ -47,7 +65,7 @@ export default function GeneralInformation() {
           required
           onChange={(e) => handleChange(e, "country")}
           type="text"
-          placeholder="Location"
+          placeholder={t('location')}
           className="input input-bordered w-full"
           defaultValue={curriculum.country}
         />
@@ -56,7 +74,7 @@ export default function GeneralInformation() {
           onChange={(e) => handleChange(e, "email")}
           defaultValue={curriculum.email}
           type="email"
-          placeholder="Email"
+          placeholder={t('email')}
           className="input input-bordered w-full"
         />
         <input
@@ -64,7 +82,7 @@ export default function GeneralInformation() {
           onChange={(e) => handleChange(e, "phone")}
           defaultValue={curriculum.phone}
           type="tel"
-          placeholder="Phone"
+          placeholder={t('phone')}
           className="input input-bordered w-full"
         />
         <input
@@ -72,13 +90,13 @@ export default function GeneralInformation() {
           onChange={(e) => handleChange(e, "website")}
           defaultValue={curriculum.website}
           type="text"
-          placeholder="Website"
+          placeholder={t('website')}
           className="input input-bordered w-full"
         />
         <textarea
           onChange={(e) => handleChange(e, "about")}
           defaultValue={curriculum.about}
-          placeholder="About"
+          placeholder={t('about')}
           className="textarea textarea-bordered h-24 text-base"
         ></textarea>
       </FormGroup>

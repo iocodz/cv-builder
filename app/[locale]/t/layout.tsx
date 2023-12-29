@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
     const router = useRouter();
     const [processing, setProcessing] = useState(true);
-    const curriculum: CurriculumType = useStoreState<StateType>((state) => state.curriculum);
+    const { curriculum } : { curriculum: CurriculumType } = useStoreState<StateType>((state) => state.curriculum);
   
     useEffect(() => {
       const handler = () => {
@@ -35,12 +35,12 @@ export default function RootLayout({
     const continueEditing = () => {
         router.push("/")
     }
-  
+
     return (
-      <div className="text-gray-800 dark:text-gray-800 relative w-full min-h-screen overflow-x-hidden flex justify-center content-center bg-gray-100">
+      <div className="relative text-gray-800 dark:text-gray-800 w-full min-h-screen overflow-x-hidden flex justify-center content-center bg-gray-100">
         <div
           id="download"
-          className="p-8 absolute min-h-screen w-full top-0 left-0 bg-base-100 flex flex-col gap-4 items-center justify-center"
+          className="fixed p-8 min-h-screen w-full top-0 left-0 bg-base-100 flex flex-col gap-4 items-center justify-center"
         >
           {processing ? (
             <span className="loading loading-spinner loading-lg"></span>

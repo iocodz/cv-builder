@@ -30,7 +30,7 @@ export const curriculumEmptyData: CurriculumType = {
 
 export const curriculumFakeData: CurriculumType = {
   name: "John Doe",
-  image: "https://ntrepidcorp.com/wp-content/uploads/2016/06/team-1.jpg",
+  image: "",
   title: "Full Stack Developer",
   about:
     "Enthusiastic and experienced Full Stack Developer with a passion for building scalable web applications and engaging user experiences. Skilled in modern web technologies and frameworks.",

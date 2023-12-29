@@ -7,11 +7,6 @@ export const templates: TemplateType[] = [
       picture: "/templates/ease.png",
     },
     {
-      name: "toreylittlefield",
-      slug: "/t/toreylittlefield",
-      picture: "/templates/toreylittlefield.png",
-    },
-    {
       name: "amsterdam",
       slug: "/t/amsterdam",
       picture: "/templates/amsterdam.png",

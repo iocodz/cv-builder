@@ -2,16 +2,15 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { CurriculumType } from "../_types";
 import FormGroup from "./FormGroup";
 import { StateType } from "../_lib/store";
+import { useTranslations } from "next-intl";
 
 export default function Skills() {
-  const curriculum: CurriculumType = useStoreState<StateType>(
+  const t = useTranslations('BUILDER');
+  const { curriculum } : {curriculum: CurriculumType} = useStoreState<StateType>(
     (state) => state.curriculum
   );
-  const addSkill = useStoreActions<StateType>(
-    (actions) => actions.addSkill
-  );
-  const deleteSkill = useStoreActions<StateType>(
-    (actions) => actions.deleteSkill
+  const { addSkill, deleteSkill } = useStoreActions<StateType>(
+    (actions) => actions.curriculum
   );
 
   const handleAddSkill = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -28,13 +27,13 @@ export default function Skills() {
   }
 
   return (
-    <FormGroup title={"Skills"}>
+    <FormGroup title={"skills"}>
         <div className="grid grid-cols-1 gap-2">
           <input
             name="skill"
             onKeyDown={handleAddSkill}
             type="text"
-            placeholder="Add skill"
+            placeholder={t('addSkill')}
             className="input input-bordered w-full"
           />
         </div>

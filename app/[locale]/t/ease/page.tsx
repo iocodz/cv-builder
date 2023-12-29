@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { CurriculumType } from "@/app/_types";
@@ -6,9 +7,7 @@ import { useStoreState } from "easy-peasy";
 import { dateMMMYYY } from "@/app/_helpers/dateFormat";
 
 export default function EaseTemplate() {
-  const curriculum: CurriculumType = useStoreState<StateType>(
-    (state) => state.curriculum
-  );
+  const { curriculum } : { curriculum: CurriculumType } = useStoreState<StateType>((state) => state.curriculum);
 
   return (
     <div className="rounded-sm py-10 px-10 w-[900px] min-h-[1000px] bg-white">
