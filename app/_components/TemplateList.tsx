@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import FormGroup from "./FormGroup";
 import { templates } from "../_data/template";
 import { TemplateType } from "../_types";
