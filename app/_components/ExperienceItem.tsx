@@ -20,7 +20,7 @@ export default function ExperienceItem({
   );
 
   const title =
-    type === "education" ? "educationExperience" : "workExperience";
+    type === "education" ? "education" : "workExperience";
 
   const handleUpdateExperience = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
