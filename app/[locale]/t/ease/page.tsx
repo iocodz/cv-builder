@@ -5,8 +5,10 @@ import { CurriculumType } from "@/app/_types";
 import { StateType } from "@/app/_lib/store";
 import { useStoreState } from "easy-peasy";
 import { dateMMMYYY } from "@/app/_helpers/dateFormat";
+import { useTranslations } from "next-intl";
 
 export default function EaseTemplate() {
+  const t = useTranslations('BUILDER');
   const { curriculum } : { curriculum: CurriculumType } = useStoreState<StateType>((state) => state.curriculum);
 
   return (
@@ -30,32 +32,32 @@ export default function EaseTemplate() {
       </header>
       <div className="flex gap-x-10 mt-10">
         <div className="w-2/6">
-          <strong className="text-xl font-medium">Contact Details</strong>
+          <strong className="text-xl font-medium">{t("contactDetails")}</strong>
           <ul className="mt-2 mb-10">
             <li className=" mt-1">
-              <strong className="mr-1">Website </strong>
+              <strong className="mr-1">{t("website")}</strong>
               <a href={curriculum.website} className="block">
                 {curriculum.website}
               </a>
             </li>
             <li className=" mt-1">
-              <strong className="mr-1">Phone </strong>
+              <strong className="mr-1">{t("phone")} </strong>
               <a href={"tel:" + curriculum.phone} className="block">
                 {curriculum.phone}
               </a>
             </li>
             <li className=" mt-1">
-              <strong className="mr-1">E-mail </strong>
+              <strong className="mr-1">{t("email")}E-mail </strong>
               <a href={"mailto:" + curriculum.email} className="block">
                 {curriculum.email}
               </a>
             </li>
             <li className=" mt-1">
-              <strong className="mr-1">Location</strong>
+              <strong className="mr-1">{t("location")}Location</strong>
               <span className="block">{curriculum.country}</span>
             </li>
           </ul>
-          <strong className="text-xl font-medium">Skills</strong>
+          {curriculum.skills.length > 0 && <strong className="text-xl font-medium">{t("skills")}</strong>}
           <p className="mt-2 flex gap-1 flex-wrap mb-10">
             {curriculum.skills.map((skill) => (
               <span
@@ -66,7 +68,7 @@ export default function EaseTemplate() {
               </span>
             ))}
           </p>
-          <strong className="text-xl font-medium">Languages</strong>
+          {curriculum.languages.length > 0 && <strong className="text-xl font-medium">{t("languages")}</strong>}
           <p className="mt-2 flex flex-col gap-1 flex-wrap">
             {curriculum.languages.map((language) => (
               <span
@@ -79,13 +81,13 @@ export default function EaseTemplate() {
         </div>
         <div className="w-4/6">
           <section>
-            <h2 className="text-2xl pb-1 border-b font-semibold">About</h2>
+            <h2 className="text-2xl pb-1 border-b font-semibold">{t("about")}</h2>
             <p className="mt-4 text-lg">{curriculum.about}</p>
           </section>
           <section>
-            <h2 className="text-2xl mt-6 pb-1 border-b font-semibold">
-              Work Experiences
-            </h2>
+            {curriculum.work.length > 0 && <h2 className="text-2xl mt-6 pb-1 border-b font-semibold">
+            {t("workExperience")}
+            </h2>}
             <ul className="mt-2">
               {curriculum.work.map((experience, i) => (
                 <li key={i} className="pt-2">
@@ -104,9 +106,9 @@ export default function EaseTemplate() {
             </ul>
           </section>
           <section>
-            <h2 className="text-2xl mt-6 pb-1 border-b font-semibold">
-              Education
-            </h2>
+            {curriculum.education.length > 0 && <h2 className="text-2xl mt-6 pb-1 border-b font-semibold">
+            {t("education")}
+            </h2>}
             <ul className="mt-2">
               {curriculum.education.map((experience, i) => (
                 <li key={i} className="pt-2">

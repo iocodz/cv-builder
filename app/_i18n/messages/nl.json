@@ -19,7 +19,7 @@
         "jobTitle": "Functietitel",
         "experience": "Ervaring",
         "endDate": "Heden",
-        "educationExperience": "Opleidingservaring",
+        "education": "Opleidingservaring",
         "degree": "Diploma",
         "educationDescription": "Beschrijving",
         "skills": "Vaardigheden",
@@ -30,6 +30,9 @@
         "template": "Sjabloon",
         "delete": "Verwijderen",
         "add": "Toevoegen",
-        "download": "Download"
+        "download": "Download",
+        "contactDetails": "Contactgegevens",
+        "continueEditing": "Blijf bewerken",
+        "yourCvIsReady": "Je CV is klaar!"
     }
 }

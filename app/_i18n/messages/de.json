@@ -19,7 +19,7 @@
         "jobTitle": "Jobtitel",
         "experience": "Erfahrung",
         "endDate": "Gegenwart",
-        "educationExperience": "Bildungserfahrung",
+        "education": "Bildungserfahrung",
         "degree": "Abschluss",
         "educationDescription": "Beschreibung",
         "skills": "Fähigkeiten",
@@ -30,6 +30,9 @@
         "template": "Vorlage",
         "delete": "Löschen",
         "add": "Hinzufügen",
-        "download": "Download"
+        "download": "Download",
+        "contactDetails": "Kontaktdetails",
+        "continueEditing": "Bearbeitung fortsetzen",
+        "yourCvIsReady": "Ihr Lebenslauf ist bereit!"
     }
 }

@@ -10,7 +10,7 @@ export default function ExperienceList() {
     (state) => state.curriculum
   );
   const { addExperience } = useStoreActions<StateType>(
-    (actions) => actions
+    (actions) => actions.curriculum
   );
 
   return (

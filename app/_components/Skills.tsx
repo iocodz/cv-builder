@@ -27,7 +27,7 @@ export default function Skills() {
   }
 
   return (
-    <FormGroup title={"skills"}>
+    <FormGroup title={t("skills")}>
         <div className="grid grid-cols-1 gap-2">
           <input
             name="skill"

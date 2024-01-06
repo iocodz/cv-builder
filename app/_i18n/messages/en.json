@@ -19,7 +19,7 @@
         "jobTitle": "Job title",
         "experience": "Experience",
         "endDate": "Present",
-        "educationExperience": "Education Experience",
+        "education": "Education",
         "degree": "Degree",
         "educationDescription": "Description",
         "skills": "Skills",
@@ -30,6 +30,9 @@
         "template": "Template",
         "delete": "Delete",
         "add": "Add",
-        "download": "Download"
+        "download": "Download",
+        "contactDetails": "Contact Details",
+        "continueEditing": "Continue Editing",
+        "yourCvIsReady": "Your CV is ready!"
     }
 }

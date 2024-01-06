@@ -37,7 +37,7 @@ export default function GeneralInformation() {
   }
 
     return (
-      <FormGroup title="personalInformation">
+      <FormGroup title={t("personalInformation")}>
         <input
           required
           onChange={(e) => handleChange(e, "name")}

@@ -43,7 +43,7 @@ export default function ExperienceItem({
   };
 
   return (
-    <FormGroup title={data.institution || title}>
+    <FormGroup title={data.institution || t(title)}>
       <input
         required
         onChange={(e) => handleUpdateExperience(e, "institution")}

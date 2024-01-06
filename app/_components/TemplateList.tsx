@@ -15,7 +15,7 @@ export default function TemplateList() {
     (actions) => actions.curriculum
   );
   return (
-    <FormGroup title="template">
+    <FormGroup title={t("template")}>
       <div className="grid grid-cols-2 gap-2">
         {templates.map((t, index: number) => (
           <div

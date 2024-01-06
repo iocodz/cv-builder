@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import TemplateList from "../_components/TemplateList";
 import GeneralInformation from "../_components/GeneralInformation";
 import ExperienceList from "../_components/ExperienceList";
@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 
 const CVForm = () => {
   const t = useTranslations('BUILDER');
+  const locale = usePathname();
 
   const router = useRouter();
   const { template } : { template: TemplateType } = useStoreState<StateType>(
@@ -25,10 +26,14 @@ const CVForm = () => {
         className="relative grid grid-cols-1 gap-2"
         onSubmit={(e: any) => {
           e.preventDefault();
-          router.push(template.slug);
+          // const locale = router;
+          router.push(`${locale}/${template.slug}`);
         }}
       >
+        <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t('createYourCv')}</h1>
+        <a className="hover:link" href="https://github.com/iocodz/cv-builder" target="__blank">Source code</a>
+        </div>
         <LanguageSelector />
         <GeneralInformation />
         <ExperienceList />

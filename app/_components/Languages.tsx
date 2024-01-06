@@ -36,7 +36,7 @@ export default function Languages() {
   }
 
   return (
-    <FormGroup title={"languages"}>
+    <FormGroup title={t("languages")}>
         <div className="flex gap-2">
         <input
             onChange={(e) => setLanguage(e.target.value)}

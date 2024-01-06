@@ -10,7 +10,6 @@ import {
 } from "@/app/_types";
 import {
   curriculumEmptyData,
-  curriculumFakeData,
   experienceEmptyData,
 } from "../../../_data/curriculum";
 import { templates } from "../../../_data/template";

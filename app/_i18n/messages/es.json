@@ -19,7 +19,7 @@
         "jobTitle": "Título del Trabajo",
         "experience": "Experiencia",
         "endDate": "Actualidad",
-        "educationExperience": "Experiencia Educativa",
+        "education": "Educación",
         "degree": "Título",
         "educationDescription": "Descripción",
         "skills": "Habilidades",
@@ -30,6 +30,9 @@
         "template": "Plantilla",
         "delete": "Eliminar",
         "add": "Añadir",
-        "download": "Descargar CV"
+        "download": "Descargar CV",
+        "contactDetails": "Detalles de contacto",
+        "continueEditing": "Continuar editando",
+        "yourCvIsReady": "¡Tu currículum está listo!"
     }
 }
